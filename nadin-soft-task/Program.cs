@@ -1,6 +1,8 @@
+using DataAccess.Data;
 using DataAccess.DbCon;
 using DataAccess.Models;
 using Microsoft.EntityFrameworkCore;
+using nadin_soft_task.APIs;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,6 +13,8 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<MyDb>(options => options.UseSqlServer(
         builder.Configuration.GetConnectionString("myConStr")
     ));
+builder.Services.AddScoped<IUserData, UserData>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -22,7 +26,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-
+app.ConfigAPI();
 
 app.Run();
 

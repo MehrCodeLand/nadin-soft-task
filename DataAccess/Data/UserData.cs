@@ -4,7 +4,7 @@ using DataAccess.Models;
 
 namespace DataAccess.Data
 {
-    public class UserData
+    public class UserData : IUserData
     {
         private readonly MyDb _db;
         public UserData(MyDb db)
@@ -12,25 +12,14 @@ namespace DataAccess.Data
             _db = db;
         }
 
-        public void AddUser(User user)
+        public Task AddUser(User user)
         {
-            var result = ValidateAddUser(user);
-
-            if(result == 100)
-            {
-                _db.Users.Add(user);
-                Save();
-            }
+            _db.Users.AddAsync(user);
+            return Save();
         }
-
-        private int ValidateAddUser(User user)
+        private async Task Save()
         {
-            // some validate 
-            return 0;
-        }
-        private void Save()
-        {
-            _db.SaveChanges();  
+            await _db.SaveChangesAsync();
         }
     }
 }
