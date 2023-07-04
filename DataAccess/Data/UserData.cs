@@ -28,6 +28,12 @@ namespace DataAccess.Data
 
         }
 
+
+        public async Task UpdateUser(User user)
+        {
+            _db.Users.Update(user);
+            Save();
+        }
         public async Task<IList<User>> GetAllUser()
         {
             return await _db.Users.ToListAsync();

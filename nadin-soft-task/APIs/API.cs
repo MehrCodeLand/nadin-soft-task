@@ -10,6 +10,7 @@ namespace nadin_soft_task.APIs
             app.MapPost("/Users", AddUser);
             app.MapDelete("/Users", DeleteUser);
             app.MapGet("/Users", GetAllUsers);
+            app.MapPut("/Users", UpdateUser);
         }
 
 
@@ -39,6 +40,18 @@ namespace nadin_soft_task.APIs
             try
             {
                 data.DeleteUser(id);
+                return Results.Ok();
+            }
+            catch(Exception ex)
+            {
+                return Results.Problem(ex.Message);
+            }
+        }
+        private static async Task<IResult> UpdateUser(User user , IUserData data)
+        {
+            try
+            {
+                await data.UpdateUser(user);
                 return Results.Ok();
             }
             catch(Exception ex)
