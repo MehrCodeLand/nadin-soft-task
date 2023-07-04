@@ -8,6 +8,7 @@ namespace nadin_soft_task.APIs
         public static void ConfigAPI( this WebApplication app)
         {
             app.MapPost("/Users", AddUser);
+
         }
 
 
