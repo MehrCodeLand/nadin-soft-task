@@ -14,6 +14,8 @@ namespace nadin_soft_task.APIs
         }
 
 
+        #region API
+
         private static async Task<IResult> GetAllUsers(IUserData data)
         {
             try
@@ -59,5 +61,8 @@ namespace nadin_soft_task.APIs
                 return Results.Problem(ex.Message);
             }
         }
+
+
+        #endregion
     }
 }

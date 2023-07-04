@@ -13,13 +13,13 @@ namespace DataAccess.Data
             _db = db;
         }
 
+
+        #region CRUD
         public Task AddUser(User user)
         {
             _db.Users.AddAsync(user);
             return Save();
         }
-
-
         public void DeleteUser(int id)
         {
             var user = _db.Users.FirstOrDefault(x => x.Id == id);
@@ -27,8 +27,6 @@ namespace DataAccess.Data
             Save();
 
         }
-
-
         public async Task UpdateUser(User user)
         {
             _db.Users.Update(user);
@@ -38,6 +36,8 @@ namespace DataAccess.Data
         {
             return await _db.Users.ToListAsync();
         }
+
+        #endregion
 
         #region private Method
 
